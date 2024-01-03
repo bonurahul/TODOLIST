@@ -1,0 +1,208 @@
+<html>
+
+    <head>
+        <title>
+          MSD-ASSIGNMENT-1
+        </title>
+        <style type="text/css">
+          h1{
+            background-color:DodgerBlue;
+            width: 41%;
+            margin: auto;
+          }
+          body {
+	 background-color: #DBF9FC;;
+	font-family: Calibri, Myriad;
+}
+table.table-1{
+	margin: auto;
+	width: 600px;
+	border-collapse: collapse;
+	border: 5px solid black; /*for older IE*/
+	border-style: hidden;
+}
+
+table.table-1 caption {
+	background-color: #f79646;
+	color: #fff;
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: .3em;
+}
+
+table.table-1 thead th {
+	padding: 8px;
+	background-color: #fde9d9;
+	font-size: large;
+}
+
+table.table-1 thead th#thDay {
+	width: 40%;	
+}
+
+table.table-1thead th#thRegular, table.timecard thead th#thOvertime, table.timecard thead th#thTotal {
+	width: 20%;
+}
+
+table.table-1 th, table.timecard td {
+	padding: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #f79646 #ccc;
+}
+
+table.table-1 td {
+	text-align: right;
+}
+
+table.table-1 tbody th {
+	text-align: left;
+	font-weight: normal;
+}
+
+table.table-1 tfoot {
+	font-weight: bold;
+	font-size: large;
+	background-color: #687886;
+	color: #fff;
+}
+
+table.table-1 tr.even {
+	background-color: #fde9d9;
+}
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 15px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #5ddbad;
+  color: white;
+}
+table, th, td {
+  border: 1px solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+#delete {
+  display: block;
+  margin: 0 auto;
+}
+#customers{
+  width:41%;
+
+}
+#table-1{
+  width:41%;
+}
+        </style>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  
+    </head>
+   <script src=" https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <body>
+      <fieldset>
+      <ul>
+        <h1 align="center">TODO LIST</h1>
+<section class="container">
+        
+
+            <!-- form to create task -->
+        <form action="/create-task" method="POST">
+
+            <table class="table-1">
+                <thead>
+                  <tr class="table-active">
+                    <th >TASK U WANNA FINISH</th>
+                    <th >CATEGORY</th>
+                    <th >DUE DATE</th>
+                    
+                    
+                  </tr>
+                </thead>
+            
+            
+                <tbody>
+                    <tr>
+                      <td> <input type="text" name="description"placeholder="What do you need to do?" required></input></th>
+                      <td >  <select name="category">
+                        
+                        <option selected disabled>Choose one category</option>
+                        <option>PERSONAL TASKS</option>
+                        <option>WORK TASK</option>
+                        <option>HOME TASKS</option>
+                        <option>SHOPPING LIST</option>
+                        <option>HEALTH AND FITNESS</option>
+                        <option>EDUCATION</option>
+                        <option>SOCIAL ACTIVITES</option>
+                        <option>MISCELLANEOUS</option>
+
+                    </select></td>
+                      <td > <input type="date" name="date"></td>
+                      <!-- <td ><input type="submit"  class="btn btn-success"id="add" value="ADD-TASK"></td> -->
+                     
+                    </tr>
+                </tbody>
+            
+            </table>
+            <div style="margin-top:2%", align = "center"> <input type="submit"  class="btn btn-success"id="add" value="ADD-TASK">
+              </div>
+                  
+  </form>
+    </section>
+    <h1 align="center">TASKS LIST</h1>
+   
+    <form action="/delete-task" method="get">
+     
+    </td>
+        <table id="customers" style="margin-top: 30px;">
+            <thead>
+                <tr>
+                    <th>CHECKED</th>
+                    <th>DESCRIPTION</th>
+                    <th>CATEGORY</th>
+                    <th>DUE DATE</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <% for(let i of list_data){ %>
+                    <tr>
+                        <td><input type="checkbox" name="<%=i._id%>"onchange="strikeText(this)"/></td>
+                        <td><%= i.description %></td>
+                        <td><%= i.category %></td>
+                        <td><%= i.date %></td>
+                    </tr>
+                    <%} %>
+            </tbody>
+            
+        </table>
+        <div style="margin-top:2%", align = "center"><input type="submit" class="btn btn-danger" value="DELETE THE SELECTED TASK">
+                  </div>
+    </form>
+    <script>
+              function strikeText(checkbox){
+                var row = checkbox.parentNode.parentNode;
+  var text1 = row.getElementsByTagName("td")[1];
+  var text2=row.getElementsByTagName("td")[2];
+  var text3=row.getElementsByTagName("td")[3];
+  if (checkbox.checked) {
+    text1.style.textDecoration = "line-through";
+    text2.style.textDecoration = "line-through";
+    text3.style.textDecoration = "line-through";
+    console.log("TASK FINISHED SUCCESFULLY");
+  } else {
+    text1.style.textDecoration = "none";
+    text2.style.textDecoration = "none";
+    text3.style.textDecoration = "none";
+  }
+
+              }
+            </script>
+     </fieldset>
+ </body>
+
+  
+</html>
